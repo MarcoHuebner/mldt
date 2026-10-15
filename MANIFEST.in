@@ -1,0 +1,2 @@
+recursive-include mldt/_native *.c *.pyx
+recursive-include data *.json *.md *.npz

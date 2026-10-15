@@ -1,0 +1,67 @@
+[build-system]
+requires = ["setuptools>=69", "wheel", "Cython>=3.0", "scipy>=1.10"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mldt"
+version = "0.1.0"
+description = "Stable multi-layer diffusion theory reflectance solvers"
+readme = "README.md"
+requires-python = ">=3.11"
+license = {text = "MIT"}  # as per original README
+authors = [{name = "Thomas T. Livecchi"}]
+dependencies = [
+  "numpy>=1.24",
+  "scipy>=1.10",
+]
+classifiers = [
+  "Programming Language :: Python :: 3",
+  "Programming Language :: Python :: 3.11",
+  "Programming Language :: Python :: 3.12",
+  "Programming Language :: Python :: 3.13",
+  "License :: OSI Approved :: MIT License",
+]
+
+[project.optional-dependencies]
+torch = ["torch>=2.1"]
+native = ["Cython>=3.0"]
+accelerated = ["Cython>=3.0", "torch>=2.1"]
+mcmlnet = [
+  "mcmlnet @ git+https://github.com/IMSY-DKFZ/mcmlnet.git@93ca4c496e64977b7700e720677b0c56c49a90bb",
+  # Match the compatible stack locked by this mcmlnet revision.
+  "shap==0.48.0",
+  "numba==0.61.2",
+  "llvmlite==0.44.0",
+  "numpy<2.3",
+  "python-dotenv>=1.0",
+  "torchvision",
+  "lightning>=2.5",
+  "rich>=13",
+  "pip>=26.2.1",
+]
+dev = [
+  "pytest>=8",
+  "ruff>=0.6",
+  "pre-commit>=4.0",
+  "build>=1.2",
+  "Cython>=3.0",
+  "torch>=2.1",
+  "matplotlib>=3.8",
+]
+
+[tool.setuptools]
+include-package-data = true
+
+[tool.setuptools.packages.find]
+include = ["mldt*"]
+
+[tool.setuptools.package-data]
+"mldt._native" = ["*.pyx", "*.c"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-ra"
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
