@@ -1657,6 +1657,7 @@ dev = [
     { name = "matplotlib" },
     { name = "pre-commit" },
     { name = "pytest" },
+    { name = "pytest-cov" },
     { name = "ruff" },
     { name = "torch" },
 ]
@@ -1695,6 +1696,7 @@ requires-dist = [
     { name = "pip", marker = "extra == 'mcmlnet'", specifier = ">=26.2.1" },
     { name = "pre-commit", marker = "extra == 'dev'", specifier = ">=4.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=8" },
+    { name = "pytest-cov", marker = "extra == 'dev'", specifier = ">=5" },
     { name = "python-dotenv", marker = "extra == 'mcmlnet'", specifier = ">=1.0" },
     { name = "rich", marker = "extra == 'mcmlnet'", specifier = ">=13" },
     { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.6" },
