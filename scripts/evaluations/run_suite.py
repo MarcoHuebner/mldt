@@ -242,7 +242,8 @@ def main() -> None:
         subprocess.run(
             [
                 sys.executable,
-                "scripts/evaluations/analyze_suite.py",
+                "-m",
+                "scripts.evaluations.analyze_suite",
                 str(results_path),
                 "--output-dir",
                 str(args.output_dir),

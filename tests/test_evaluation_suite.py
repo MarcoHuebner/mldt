@@ -88,7 +88,8 @@ def test_smoke_profile_runs_all_non_external_stages_and_analysis(tmp_path: Path)
     output = tmp_path / "suite"
     command = [
         sys.executable,
-        "scripts/evaluations/run_suite.py",
+        "-m",
+        "scripts.evaluations.run_suite",
         "--profile",
         "smoke",
         "--backends",
