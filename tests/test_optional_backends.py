@@ -130,3 +130,28 @@ def test_torch_banded_solver_falls_back_for_extreme_property_scale(
     assert torch.isfinite(tm.grad).all()
     assert torch.isfinite(ts.grad).all()
     assert torch.isfinite(td.grad).all()
+
+
+def test_torch_reflectance_gradient_matches_central_difference() -> None:
+    """Compare Torch's absorption gradient with an independent central difference."""
+    torch = pytest.importorskip("torch")
+    from mldt.numpy import reflectance
+    from mldt.torch import reflectance as torch_reflectance
+
+    mua = np.array([[0.03, 0.05]])
+    musp = np.array([[1.1, 1.7]])
+    thicknesses = np.array([0.4])
+    tm = torch.tensor(mua, dtype=torch.float64, requires_grad=True)
+    ts = torch.tensor(musp, dtype=torch.float64)
+    td = torch.tensor(thicknesses, dtype=torch.float64)
+
+    torch_reflectance(tm, ts, td, 1.4).sum().backward()
+
+    h = 1e-6
+    plus, minus = mua.copy(), mua.copy()
+    plus[0, 1] += h
+    minus[0, 1] -= h
+    expected = (
+        reflectance(plus, musp, thicknesses, 1.4)[0] - reflectance(minus, musp, thicknesses, 1.4)[0]
+    ) / (2 * h)
+    assert tm.grad[0, 1].item() == pytest.approx(expected, abs=2e-8)
