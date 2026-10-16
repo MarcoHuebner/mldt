@@ -123,8 +123,10 @@ def test_torch_banded_solver_falls_back_for_extreme_property_scale(
     np.testing.assert_allclose(
         actual.detach().numpy(),
         reflectance(mua, musp, thicknesses, 1.7),
-        rtol=2e-11,
-        atol=2e-11,
+        # This deliberately extreme system is ill-conditioned; dense LAPACK
+        # solvers can differ slightly across platforms after pivoting.
+        rtol=5e-8,
+        atol=1e-10,
     )
     actual.sum().backward()
     assert torch.isfinite(tm.grad).all()
