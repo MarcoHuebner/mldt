@@ -1,0 +1,20 @@
+{
+  "publication": "J. Biomed. Opt. 31(9), 095006 (2026)",
+  "doi": "10.1117/1.JBO.31.9.095006",
+  "historical_notebook_sha256": "2a534c3d2281303aa00130f39ac92c4e4f9e5cac7ce5f3f18a7efb5b76f186e1",
+  "boundary_reference": {
+    "n_tissue": 1.4,
+    "n_outside": 1.0,
+    "A": 0.1695781764181
+  },
+  "resonance_reference": {
+    "mua": 1.0,
+    "musp": 2.0,
+    "reflectance": 0.11239762
+  },
+  "mcx_reference": {
+    "path": "data/mcx_reference.json",
+    "photon_count": 10000,
+    "note": "The publication timing uses 1000000 photons."
+  }
+}
